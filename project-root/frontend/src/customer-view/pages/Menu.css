@@ -1,0 +1,1171 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   MENU.CSS - COMPLETE MOBILE-RESPONSIVE VERSION
+   Optimized for: Desktop, Tablet, Mobile, Small Mobile
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── CSS CUSTOM PROPERTIES ── */
+:root {
+  --zomato-red: #ff4747;
+  --zomato-green: #2ecc71;
+  --zomato-dark: #1c1c1c;
+  --zomato-gray: #6b7280;
+  --zomato-light-gray: #f8fafc;
+  --zomato-border: #e5e7eb;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MENU PAGE LAYOUT
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.menu-page,
+.related-page {
+  min-height: 100vh;
+  background: var(--zomato-light-gray);
+}
+
+/* ── HERO SECTION ── */
+.menu-hero,
+.related-hero {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 50px;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.menu-hero-content,
+.related-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-hero-content h1,
+.related-hero-content h1 {
+  color: white;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-hero-content p,
+.related-hero-content p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 18px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Video Hero */
+.related-hero-video {
+  position: relative;
+  overflow: hidden;
+}
+
+.related-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(46, 204, 113, 0.8));
+  z-index: 1;
+}
+
+/* ── BACK BUTTON ── */
+.back-btn,
+.menu-page-back-btn {
+  background: white;
+  color: var(--zomato-dark);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-top: 90px;
+  margin-left: 50px;
+}
+
+.menu-page-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+.back-btn:hover,
+.menu-page-back-btn:hover {
+  background: var(--zomato-red);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 71, 71, 0.3);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FILTERS & CONTROLS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.filters-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.related-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  color: var(--zomato-gray);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.filter-group select,
+.filter-group input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid var(--zomato-border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--zomato-dark);
+  outline: none;
+  transition: all 0.3s;
+  min-width: 150px;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: var(--zomato-red);
+  box-shadow: 0 0 0 3px rgba(255, 71, 71, 0.1);
+}
+
+.item-count {
+  font-size: 14px;
+  color: var(--zomato-gray);
+  font-weight: 600;
+  padding: 8px 16px;
+  background: var(--zomato-light-gray);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MENU ITEMS GRID
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.menu-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 50px 50px;
+}
+
+.menu-items-grid,
+.related-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.menu-item-card,
+.related-item-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-card.clickable:hover,
+.related-item-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--zomato-red);
+}
+
+/* ── MENU ITEM IMAGE ── */
+.menu-item-image,
+.related-item-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: var(--zomato-light-gray);
+}
+
+.menu-item-image img,
+.related-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.menu-item-card:hover .menu-item-image img,
+.related-item-card:hover .related-item-image img {
+  transform: scale(1.1);
+}
+
+.discount-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--zomato-red);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 71, 71, 0.4);
+  z-index: 2;
+}
+
+/* ── MENU ITEM INFO ── */
+.menu-item-info,
+.related-item-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.menu-item-info h4,
+.related-item-info h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--zomato-dark);
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.menu-item-info p,
+.related-item-info p {
+  font-size: 14px;
+  color: var(--zomato-gray);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── RATING DISPLAY ── */
+.menu-item-rating,
+.related-item-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-stars .stars {
+  color: #fbbf24;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.rating-stars.no-ratings .stars {
+  color: #d1d5db;
+}
+
+.rating-text {
+  font-size: 13px;
+  color: var(--zomato-gray);
+  font-weight: 600;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* ── PRICING ── */
+.menu-item-pricing,
+.related-item-pricing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--zomato-border);
+  gap: 12px;
+}
+
+.price-info {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.original-price,
+.price-strikethrough {
+  font-size: 14px;
+  color: var(--zomato-gray);
+  text-decoration: line-through;
+}
+
+.discounted-price,
+.related-item-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--zomato-dark);
+}
+
+/* ── ADD TO CART BUTTON ── */
+.add-btn,
+.add-btn-small {
+  background: linear-gradient(135deg, var(--zomato-red), #ff6b6b);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(255, 71, 71, 0.3);
+  white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover,
+.add-btn-small:hover {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+.add-btn:active,
+.add-btn-small:active {
+  transform: translateY(0);
+}
+
+.add-btn-small {
+  padding: 6px 14px;
+  font-size: 12px;
+  min-height: 36px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RECIPE DETAIL VIEW
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.recipe-detail-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 50px;
+}
+
+.recipe-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* ── LEFT COLUMN: RECIPE CONTENT ── */
+.recipe-content {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.recipe-image {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--zomato-border);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.recipe-price {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.price-original {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--zomato-dark);
+}
+
+.price-discount {
+  background: var(--zomato-red);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ── PREP INFO ── */
+.prep-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(46, 204, 113, 0.05));
+  border-radius: 16px;
+  margin-bottom: 30px;
+  border: 2px solid rgba(46, 204, 113, 0.2);
+}
+
+.prep-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.prep-item i {
+  font-size: 28px;
+  color: var(--zomato-red);
+}
+
+.prep-label {
+  font-size: 12px;
+  color: var(--zomato-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.prep-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--zomato-dark);
+}
+
+/* ── RECIPE SECTIONS ── */
+.recipe-section {
+  margin-bottom: 30px;
+  padding: 24px;
+  background: var(--zomato-light-gray);
+  border-radius: 16px;
+  border: 1px solid var(--zomato-border);
+}
+
+.recipe-section h3 {
+  font-size: 20px;
+  color: var(--zomato-dark);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.recipe-section h3 i {
+  color: var(--zomato-red);
+  font-size: 22px;
+}
+
+/* Ingredients */
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.ingredients-list li {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--zomato-dark);
+  border-left: 3px solid var(--zomato-red);
+  background: white;
+  border-radius: 0 8px 8px 0;
+  font-weight: 500;
+}
+
+/* Preparation Steps */
+.prep-steps-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prep-step-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.step-number {
+  background: linear-gradient(135deg, var(--zomato-red), #ff6b6b);
+  color: white;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255, 71, 71, 0.3);
+}
+
+.step-text {
+  padding-top: 6px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: var(--zomato-dark);
+}
+
+/* Nutrition */
+.nutritional-section {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.08), rgba(46, 204, 113, 0.03));
+  border: 2px solid rgba(46, 204, 113, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.nutritional-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #22c55e, #16a34a, #15803d);
+}
+
+.nutritional-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.nutrient-item {
+  background: white;
+  padding: 18px 12px;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(46, 204, 113, 0.1);
+  transition: all 0.3s;
+}
+
+.nutrient-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+}
+
+.nutrient-name {
+  font-size: 12px;
+  color: var(--zomato-gray);
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.nutrient-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--zomato-dark);
+}
+
+/* Badges & Tags */
+.badge-featured,
+.badge-popular {
+  padding: 6px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-featured {
+  background: #fef08a;
+  color: #854d0e;
+}
+
+.badge-popular {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.tags-container,
+.allergen-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-badge {
+  padding: 6px 14px;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #7dd3fc;
+}
+
+.allergen-tag {
+  padding: 6px 14px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #fecaca;
+}
+
+/* ── RIGHT COLUMN: RELATED ITEMS ── */
+.related-items-column {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.related-items-title {
+  font-size: 20px;
+  color: var(--zomato-dark);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--zomato-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.related-items-title i {
+  color: var(--zomato-red);
+}
+
+.related-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.related-items-column .related-item-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.related-items-column .related-item-card:hover {
+  background: rgba(46, 204, 113, 0.05);
+  border-color: var(--zomato-red);
+  transform: translateX(4px);
+}
+
+.related-items-column .related-item-image {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.related-items-column .related-item-info {
+  padding: 0 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.related-items-column .related-item-info h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.related-items-column .related-item-info p {
+  display: none;
+}
+
+.related-items-column .related-item-pricing {
+  margin-top: 8px;
+}
+
+.related-items-column .related-item-price {
+  font-size: 16px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FLOATING CART BUTTON
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.floating-cart {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--zomato-red), #ff6b6b);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 71, 71, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.floating-cart:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(255, 71, 71, 0.5);
+}
+
+.floating-cart .cart-count-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #27ae60;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  min-width: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EMPTY STATES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.no-items {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--zomato-gray);
+}
+
+.no-items i {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+  color: var(--zomato-border);
+}
+
+.no-items p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.no-data {
+  color: var(--zomato-gray);
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── TABLET (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .menu-hero,
+  .related-hero {
+    padding: 50px 30px;
+    min-height: 250px;
+  }
+
+  .menu-hero-content h1,
+  .related-hero-content h1 {
+    font-size: 36px;
+  }
+
+  .menu-page-back-btn {
+    margin-top: 60px;
+    margin-left: 10px;
+  }
+
+  .filters-container,
+  .menu-content,
+  .recipe-detail-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .menu-items-grid,
+  .related-items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  /* Recipe Detail - Stack columns */
+  .recipe-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .related-items-column {
+    position: static;
+    max-height: none;
+  }
+
+  .related-items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .related-items-column .related-item-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .related-items-column .related-item-image {
+    width: 100%;
+    height: 140px;
+  }
+
+  .related-items-column .related-item-info p {
+    display: block;
+  }
+}
+
+/* ── MOBILE (≤ 768px) ── */
+@media (max-width: 768px) {
+  .menu-hero,
+  .related-hero {
+    padding: 40px 20px;
+    min-height: 200px;
+  }
+
+  .menu-hero-content h1,
+  .related-hero-content h1 {
+    font-size: 28px;
+  }
+
+  .menu-hero-content p,
+  .related-hero-content p {
+    font-size: 16px;
+  }
+
+  .menu-page-back-btn {
+    top: 12px;
+    left: 12px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .filters-container,
+  .menu-content,
+  .recipe-detail-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .related-filters {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .filter-group {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .filter-group select,
+  .filter-group input {
+    width: 100%;
+  }
+
+  .menu-items-grid,
+  .related-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .menu-item-image,
+  .related-item-image {
+    height: 180px;
+  }
+
+  .menu-item-info h4,
+  .related-item-info h4 {
+    font-size: 16px;
+  }
+
+  .menu-item-info p,
+  .related-item-info p {
+    font-size: 13px;
+  }
+
+  .discounted-price {
+    font-size: 20px;
+  }
+
+  /* Recipe Detail */
+  .recipe-content {
+    padding: 24px;
+  }
+
+  .recipe-image {
+    height: 250px;
+  }
+
+  .recipe-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .price-original {
+    font-size: 28px;
+  }
+
+  .prep-info {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+  }
+
+  .ingredients-list {
+    grid-template-columns: 1fr;
+  }
+
+  .nutritional-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .related-items-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* Buttons - Larger touch targets */
+  .add-btn,
+  .add-btn-small {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .menu-item-pricing {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ── SMALL MOBILE (≤ 480px) ── */
+@media (max-width: 480px) {
+  .menu-hero,
+  .related-hero {
+    padding: 30px 16px;
+  }
+
+  .menu-hero-content h1,
+  .related-hero-content h1 {
+    font-size: 24px;
+  }
+
+  .menu-hero-content p,
+  .related-hero-content p {
+    font-size: 14px;
+  }
+
+  .filters-container,
+  .menu-content,
+  .recipe-detail-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .menu-items-grid,
+  .related-items-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .menu-item-image,
+  .related-item-image {
+    height: 200px;
+  }
+
+  .recipe-content {
+    padding: 20px;
+  }
+
+  .recipe-image {
+    height: 220px;
+  }
+
+  .price-original {
+    font-size: 24px;
+  }
+
+  .prep-info {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .nutritional-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .floating-cart {
+    width: 56px;
+    height: 56px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+  }
+}
+
+/* ── EXTRA SMALL (≤ 375px) ── */
+@media (max-width: 375px) {
+  .menu-hero-content h1,
+  .related-hero-content h1 {
+    font-size: 22px;
+  }
+
+  .menu-item-info h4,
+  .related-item-info h4 {
+    font-size: 15px;
+  }
+
+  .discounted-price {
+    font-size: 18px;
+  }
+
+  .add-btn,
+  .add-btn-small {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY & PERFORMANCE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Touch target sizes */
+@media (max-width: 768px) {
+  .add-btn,
+  .add-btn-small,
+  .back-btn,
+  .menu-page-back-btn,
+  .floating-cart {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible */
+.add-btn:focus-visible,
+.filter-group select:focus-visible,
+.filter-group input:focus-visible {
+  outline: 3px solid var(--zomato-red);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .floating-cart,
+  .back-btn,
+  .menu-page-back-btn,
+  .related-filters,
+  .add-btn,
+  .add-btn-small {
+    display: none;
+  }
+}

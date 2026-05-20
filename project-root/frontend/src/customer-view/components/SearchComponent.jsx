@@ -1,0 +1,255 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { API_CONFIG } from '../../config/api';
+import './SearchComponent.css';
+
+const SearchComponent = ({ placeholder = "Search for OnePlus products..." }) => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [popularItems, setPopularItems] = useState([]);
+  const navigate = useNavigate();
+  const searchRef = useRef(null);
+
+  // Fetch popular items on mount
+  useEffect(() => {
+    const fetchPopularItems = async () => {
+      try {
+        // Use existing items endpoint to get popular items
+        const response = await fetch(`${API_CONFIG.API_URL}/items`);
+        const data = await response.json();
+        if (data.success && data.data) {
+          // Filter out items with null names and get first 10 items as "popular"
+          const validItems = data.data.filter(item => item && item.name);
+          const popularItems = validItems.slice(0, 10);
+          setPopularItems(popularItems);
+        }
+      } catch (error) {
+        console.error('Error fetching popular items:', error);
+      }
+    };
+    fetchPopularItems();
+  }, []);
+
+  // Search API call with debouncing and fallback logic
+  const handleSearch = async (searchQuery) => {
+    console.log('ð Frontend search for:', searchQuery);
+    
+    if (!searchQuery.trim()) {
+      setResults([]);
+      setShowResults(false);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Try localhost first, then fallback to production using original search endpoint
+      const searchEndpoints = [
+        'http://localhost:50017/api/search',
+        `${API_CONFIG.API_URL}/search`
+      ];
+      
+      let data = null;
+      let lastError = null;
+      
+      for (const endpoint of searchEndpoints) {
+        try {
+          console.log('ððð Trying search endpoint:', endpoint, 'with query:', searchQuery);
+          const response = await fetch(`${endpoint}?q=${encodeURIComponent(searchQuery)}`);
+          data = await response.json();
+          console.log('ððð Search results from', endpoint, ':', data);
+          
+          if (data.success) {
+            setResults(data.data);
+            setShowResults(true);
+            console.log('ð showResults set to true, results:', data.data);
+            return; // Success, exit the function
+          }
+        } catch (error) {
+          console.log('ð Search endpoint failed:', endpoint, error);
+          lastError = error;
+          continue; // Try next endpoint
+        }
+      }
+      
+      // If all endpoints failed
+      console.error('All search endpoints failed. Last error:', lastError);
+      setResults([]);
+      setShowResults(false);
+      
+    } catch (error) {
+      console.error('Search error:', error);
+      setResults([]);
+      setShowResults(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Debounced search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (query.trim()) {
+        handleSearch(query);
+      } else {
+        setResults([]);
+        setShowResults(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // Close search results when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleItemClick = (item) => {
+    if (item && item._id) {
+      // Navigate to menu page with item info (Menu.jsx expects 'id' parameter)
+      navigate(`/menu?id=${item._id}`);
+      setShowResults(false);
+      setQuery('');
+    }
+  };
+
+  const handleInputFocus = () => {
+    if (!query.trim() && popularItems.length > 0) {
+      setShowResults(true);
+    }
+  };
+
+  const handleClearSearch = () => {
+    setQuery('');
+    setResults([]);
+    setShowResults(false);
+  };
+
+  return (
+    <div className="search-component" ref={searchRef}>
+      <div className="search-input-container">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={handleInputFocus}
+          placeholder={placeholder}
+          className="search-input"
+        />
+        {query && (
+          <button 
+            className="search-clear-btn"
+            onClick={handleClearSearch}
+            aria-label="Clear search"
+          >
+            ✕
+          </button>
+        )}
+        <div className="search-icon">
+          🔍
+        </div>
+      </div>
+
+      {showResults && (
+        <div className="search-results">
+          {console.log('ð Rendering search dropdown, showResults:', showResults, 'results.length:', results.length, 'loading:', loading)}
+          {loading ? (
+            <div className="search-loading">
+              <div className="search-spinner"></div>
+              Searching...
+            </div>
+          ) : results.length > 0 ? (
+            <>
+              <div className="search-results-header">
+                <span>Results ({results.length})</span>
+              </div>
+              {results.filter(item => item && item.name).map(item => (
+                <div
+                  key={item._id}
+                  className="search-result-item"
+                  onClick={() => handleItemClick(item)}
+                >
+                  <div className="search-result-image">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name || 'Product image'} loading="lazy" />
+                    ) : (
+                      <div className="search-result-placeholder">
+                        📱
+                      </div>
+                    )}
+                  </div>
+                  <div className="search-result-info">
+                    <h4 className="search-result-name">{item.name || 'Unknown Product'}</h4>
+                    <p className="search-result-description">{item.description || 'Premium OnePlus product details'}</p>
+                    <div className="search-result-meta">
+                      <span className="search-result-category">{item.category || 'Product'}</span>
+                      <span className="search-result-rating">⭐ {item.rating || 4.5}</span>
+                      <span className="search-result-time">⏱️ {item.prepTime || '15-20 min'}</span>
+                    </div>
+                    <div className="search-result-price">
+                      {item.discountPrice ? (
+                        <>
+                          <span className="original-price">₹{item.price || 0}</span>
+                          <span className="discounted-price">₹{item.discountPrice}</span>
+                        </>
+                      ) : (
+                        <span className="price">₹{item.price || 0}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : query.trim() ? (
+            <div className="search-no-results">
+              <div className="search-no-results-icon">🔍</div>
+              <h4>No results found</h4>
+              <p>Try searching for something else</p>
+            </div>
+          ) : popularItems.length > 0 ? (
+            <>
+              <div className="search-results-header">
+                <span>Popular Items</span>
+              </div>
+              {popularItems.filter(item => item && item.name).map(item => (
+                <div
+                  key={item._id}
+                  className="search-result-item popular-item"
+                  onClick={() => handleItemClick(item)}
+                >
+                  <div className="search-result-image">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name || 'Product image'} loading="lazy" />
+                    ) : (
+                      <div className="search-result-placeholder">
+                        📱
+                      </div>
+                    )}
+                  </div>
+                  <div className="search-result-info">
+                    <h4 className="search-result-name">{item.name || 'Unknown Product'}</h4>
+                    <span className="search-result-category">{item.category || 'Product'}</span>
+                    <div className="search-result-price">
+                      <span className="price">₹{item.price || 0}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : null}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchComponent;
